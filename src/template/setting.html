@@ -1,0 +1,32 @@
+{%extends "base.html" %}
+{% block metadata%}
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/settingapp.css">
+<script src="/static/js/settingapp.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap-datetimepicker.min.css">
+<script src="/static/js/bootstrap-datetimepicker.min.js"></script>
+
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/custom-theme/jquery-ui-1.9.2.custom.css">
+<script src="/static/js/jquery-ui-1.9.2.custom.min.js"></script>
+{%end%}
+{%block title%}系统设置{%end%}
+
+{%block content%}
+<div class="row content">
+    <div style="margin:15px; padding:15px;">
+        <div class="sideBarMenu col-md-2">
+            <div class="basic mainmenu">
+                <label class="menulabel">系统设置</label><span class="caret" style="margin: 15px;"></span>
+                <a class="submenu" href="/setting/basic">基本设置</a>
+                <a class="submenu" href="/setting/monitor">监控设置</a>
+            </div>
+        </div>
+
+        {%if sub_page_name == 'basic'%}
+            {%include setting_basic.html%}
+        {%elif sub_page_name == 'monitor'%}
+            {%include setting_monitor.html%}
+        {%end%}
+    </div>
+
+</div>
+{%end%}

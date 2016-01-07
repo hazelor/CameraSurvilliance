@@ -1,0 +1,69 @@
+{%extends "base.html" %}
+{% block metadata%}
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/tbapp.css">
+<script src="/static/js/tbapp.js"></script>
+{%end%}
+{%block title%}图像预览{%end%}
+
+{%block layout_preview%}
+    <div class="LayBg"></div>
+    <div class="LayBox">
+        <div class="LayImg"></div>
+        <img class="Close" src={{static_url("img/popup/close.png")}} width="27" height="27"/>
+    </div>
+</div>
+{%end%}
+
+{%block content%}
+{%for tb in allitems %}
+        {%include thumbnail.html%}
+{% end %}
+ <div class="clearfix"></div>
+<div class="row">
+    <div class="col-sm-5 left pagination">
+        <p>{{start_num}} to {{end_num}} of {{ total_num }}</p>
+    </div>
+    <div class="col-sm-7" >
+        <ul class="pagination right">
+
+            {%if current_page == 1%}
+
+            {%else%}
+
+            <li>
+                <a href="/preview?page={{current_page-1}}">上一页</a>
+            </li>
+            <li>
+                <a href="/preview?page=1">首页</a>
+            </li>
+            {%end%}
+
+            {% for index in range(start_page_num,end_page_num+1)%}
+                <li class="{%if current_page == index%}active{%end%}">
+                    <a href="/preview?page={{index}}">{{index}}</a>
+                </li>
+            {% end %}
+            {%if current_page == page_num%}
+
+            {%else%}
+            <li>
+                <a href="/preview?page={{page_num}}">尾页</a>
+            </li>
+            <li>
+                <a href="/preview?page={{current_page+1}}">下一页</a>
+            </li>
+            {%end%}
+            <li style="margin-left: 10px;">
+                 <input id="page_jump_num" class="input-txt" value="{{current_page}}"
+                        title="输入后回车自动跳转页面"
+                        onkeydown="javascript:if(event.keyCode==13){page_jump();return false;}">
+            /{{ page_num}}页
+            </li>
+
+        </ul>
+
+
+    </div>
+
+</div>
+{%end%}

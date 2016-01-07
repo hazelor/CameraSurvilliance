@@ -1,0 +1,35 @@
+#tab_con li{
+    display:none;
+}
+#tab_con .active{
+    display:block;
+}
+
+.tab_con{
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.main_param{
+    height:26px;
+    line-height: 26px;
+    padding-left:10px;
+    margin-bottom: 2px;
+    background: #eaeaea;
+    font-weight: bold;
+}
+
+.sub_param_white{
+    height:26px;
+    line-height: 26px;
+    padding-left:10px;
+    margin-bottom: 2px;
+    background: #ffffff;
+}
+
+.setting_block{
+    padding: 45px 15px 15px;
+    margin: 0 -15px 15px;
+}
+

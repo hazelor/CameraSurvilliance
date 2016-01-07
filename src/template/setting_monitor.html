@@ -1,0 +1,102 @@
+<div style="margin-left: 15px;" class="col-md-8">
+    <ul class="nav nav-tabs nav-justified" id="nav">
+        <li role="presentation" id="nav_1" class="active" onclick="switchTab(1,0)">
+            <a href="#">视频信息</a>
+        </li>
+        <li role="presentation" id="nav_2" onclick="switchTab(2,0)">
+            <a href="#">显示信息</a>
+        </li>
+        <li role="presentation" id="nav_3" onclick="switchTab(3,0)">
+            <a href="#">图片抓取</a>
+        </li>
+    </ul>
+
+    <ul id="tab_con" class="tab_con">
+        <li id="tab_con_1" class="active">
+            <div class="panel panel-default">
+              <div class="panel-heading">视频参数</div>
+              <div class="panel-body">
+                  <div class="row">
+                      <div class="col-lg-8">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            分辨率
+                          </span>
+                            <select class="combobox form-control">
+                              <option value="1280,720">1280*720p</option>
+                              <option value="640,480">640*480p</option>
+                              <option value="320,240">320*240p</option>
+
+                            </select>
+                        </div><!-- /input-group -->
+                      </div><!-- /.col-lg-6 -->
+                  </div><!-- /.row -->
+                  <p></p>
+                  <div class="row">
+                      <div class="col-lg-8">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            视频帧率
+                          </span>
+                          <select class="combobox form-control">
+                              <option value="25">25</option>
+                              <option value="20">20</option>
+                              <option value="15">15</option>
+                              <option value="10">10</option>
+                              <option value="5">5</option>
+                            </select>
+                            <span class="input-group-addon">
+                            fps
+                            </span>
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-8">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            视频旋转
+                          </span>
+                          <select class="combobox form-control">
+                              <option value="0">0</option>
+                              <option value="90">90</option>
+                              <option value="180">180</option>
+                              <option value="270">270</option>
+                            </select>
+                            <span class="input-group-addon">
+                            deg
+                            </span>
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                  </div>
+
+                  <div class="setting_block">
+                      <label>图像调节</label>
+                      <div class="row">
+                                  <span class="col-lg-2">
+                                    亮度
+                                  </span>
+                                  <span id="bright_slider" class="col-lg-2 ui-slider ui-slider-horizontal ui-corner-all ui-widget ui-widget-content">
+                                      <a class="ui-slider-handle ui-state-default ui-corner-all">
+                                        </a>
+                                  </span>
+                                  <span class="col-lg-2">
+                                      <input type="text" id="bright_value"/>
+                                  </span>
+                              </div>
+                    </div><!-- /.col-lg-6 -->
+                  </div>
+                  <p></p>
+
+              </div>
+            </div>
+        </li>
+        <li id="tab_con_2">
+            显示信息
+        </li>
+        <li id="tab_con_3">
+            图片抓取
+        </li>
+
+    </ul>
+</div>

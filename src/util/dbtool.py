@@ -7,6 +7,7 @@ __author__ = 'guoxiao'
 
 import mysql.connector
 import time
+
 from marcos import *
 
 def create_engine(user, password, database, is_auto_commit=False, host='127.0.0.1', port=3306, **kw):
@@ -27,6 +28,25 @@ def create_nowTime():
 def add_caputuredimg(filename,thumbnail_filename):
     conn = create_engine(DB_USER, DB_USER_PASSWORD, DB_NAME, is_auto_commit=True)
     cursor = conn.cursor()
-    cursor.execute('insert into %s (image_path, thumbnail_path, date) values (%s, %s, %s)', [DB_IAMGE_TABLE_NAME,filename, thumbnail_filename, create_nowTime()])
+    sqlstr = 'insert into %s (image_path, thumbnail_path, date)'%(DB_IAMGE_TABLE_NAME)
+    sqlstr = sqlstr+'values (%s, %s, %s)'
+    cursor.execute(sqlstr,[filename, thumbnail_filename, create_nowTime()])
     cursor.close()
     conn.close()
+
+
+def get_imgs(limit, offset):
+    conn = create_engine(DB_USER,DB_USER_PASSWORD, DB_NAME, is_auto_commit=True)
+    cursor = conn.cursor(dictionary=True)
+    sqlstr = "select * from image_thumbNail order by id desc limit %s offset %s"%(limit, offset)
+    cursor.execute(sqlstr)
+    result = cursor.fetchall()
+    return result
+
+
+def get_imgs_count():
+    conn = create_engine(DB_USER,DB_USER_PASSWORD, DB_NAME, is_auto_commit=True)
+    cursor = conn.cursor()
+    cursor.execute("select count(id) from image_thumbNail")
+    res = cursor.fetchall()[0][0]
+    return int(res)

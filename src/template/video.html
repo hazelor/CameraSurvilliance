@@ -1,0 +1,49 @@
+{%extends "base.html" %}
+{% block metadata%}
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/videoapp.css">
+<script src="/static/js/videoapp.js"></script>
+{%end%}
+{%block title%}视频监控{%end%}
+
+{%block content%}
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="videoContent">
+            <div class="panel panel-default">
+            </div>
+            <div style="min-height: 300px; background-color: #cecece;">
+                <img src="{{video_url}}" class="center-block">
+            </div>
+             <div class="panel panel-default">
+                  <!--<div class="panel-body">
+                     <button type="button" class="btn btn-default btn-sm" style="float: left;" onclick="RightPanelShow()">
+                         <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>抓拍
+                     </button>
+                      <button type="button" class="btn btn-default btn-sm" style="float: left;" onclick="RightPanelShow()">
+                          <span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>录像
+                      </button>
+
+                      <div class="ctrlPanel">
+                          <div>
+                              <span id="leftup"></span>
+                              <span id="up"></span>
+                              <span id="rightup"></span>
+                          </div>
+                          <div>
+                              <span id="left"></span>
+                              <span id="auto"></span>
+                              <span id="right"></span>
+                          </div>
+                          <div>
+                              <span id="leftdown"></span>
+                              <span id="down"></span>
+                              <span id="rightdown"></span>
+                          </div>
+                      </div>
+                  </div>
+                  -->
+             </div>
+        </div>
+    </div>
+</div>
+{%end%}
