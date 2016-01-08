@@ -3,10 +3,8 @@
         <li role="presentation" id="nav_1" class="active" onclick="switchTab(1,0)">
             <a href="#">视频信息</a>
         </li>
+
         <li role="presentation" id="nav_2" onclick="switchTab(2,0)">
-            <a href="#">显示信息</a>
-        </li>
-        <li role="presentation" id="nav_3" onclick="switchTab(3,0)">
             <a href="#">图片抓取</a>
         </li>
     </ul>
@@ -22,10 +20,10 @@
                           <span class="input-group-addon">
                             分辨率
                           </span>
-                            <select class="combobox form-control">
-                              <option value="1280,720">1280*720p</option>
-                              <option value="640,480">640*480p</option>
-                              <option value="320,240">320*240p</option>
+                            <select class="combobox form-control" id="resolution">
+                              <option value="1280,720">1280*720</option>
+                              <option value="640,480">640*480</option>
+                              <option value="320,240">320*240</option>
 
                             </select>
                         </div><!-- /input-group -->
@@ -38,7 +36,7 @@
                           <span class="input-group-addon">
                             视频帧率
                           </span>
-                          <select class="combobox form-control">
+                          <select class="combobox form-control" id="framerate">
                               <option value="25">25</option>
                               <option value="20">20</option>
                               <option value="15">15</option>
@@ -51,13 +49,14 @@
                         </div><!-- /input-group -->
                     </div><!-- /.col-lg-6 -->
                   </div>
+                  <p></p>
                   <div class="row">
                       <div class="col-lg-8">
                         <div class="input-group">
                           <span class="input-group-addon">
                             视频旋转
                           </span>
-                          <select class="combobox form-control">
+                          <select class="combobox form-control" id="rotate">
                               <option value="0">0</option>
                               <option value="90">90</option>
                               <option value="180">180</option>
@@ -70,33 +69,151 @@
                     </div><!-- /.col-lg-6 -->
                   </div>
 
-                  <div class="setting_block">
+                  <div class="setting_block col-lg-10">
                       <label>图像调节</label>
-                      <div class="row">
-                                  <span class="col-lg-2">
-                                    亮度
-                                  </span>
-                                  <span id="bright_slider" class="col-lg-2 ui-slider ui-slider-horizontal ui-corner-all ui-widget ui-widget-content">
+                      <table class="table table-bordered table-striped">
+                          <colgroup>
+                              <col class="col-xs-2">
+                              <col class="col-xs-9">
+                              <col class="col-xs-1">
+                          </colgroup>
+
+                          <tr>
+                              <td>亮度</td>
+                              <td>
+                                  <span id="bright_slider" style="margin-top:10px" class="col-xs-12 ui-slider ui-slider-horizontal ui-corner-all ui-widget ui-widget-content">
                                       <a class="ui-slider-handle ui-state-default ui-corner-all">
-                                        </a>
+                                      </a>
                                   </span>
-                                  <span class="col-lg-2">
-                                      <input type="text" id="bright_value"/>
+                              </td>
+                              <td>
+                                  <span>
+                                      <input type="text" id="bright_value" style="width: 30px"/>
                                   </span>
-                              </div>
+                              </td>
+                          </tr>
+
+                          <tr>
+                              <td>对比度</td>
+                              <td>
+                                  <span id="contrast_slider" style="margin-top:10px" class="col-xs-12 ui-slider ui-slider-horizontal ui-corner-all ui-widget ui-widget-content">
+                                      <a class="ui-slider-handle ui-state-default ui-corner-all">
+                                      </a>
+                                  </span>
+                              </td>
+                              <td>
+                                  <span>
+                                      <input type="text" id="contrast_value" style="width: 30px"/>
+                                  </span>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>饱和度</td>
+                              <td>
+                                  <span id="saturation_slider" style="margin-top:10px" class="col-xs-12 ui-slider ui-slider-horizontal ui-corner-all ui-widget ui-widget-content">
+                                      <a class="ui-slider-handle ui-state-default ui-corner-all">
+                                      </a>
+                                  </span>
+                              </td>
+                              <td>
+                                  <span>
+                                      <input type="text" id="saturation_value" style="width: 30px"/>
+                                  </span>
+                              </td>
+                          </tr>
+
+                          <!--<tr>-->
+                              <!--<td>锐度</td>-->
+                              <!--<td>-->
+                                  <!--<span id="sharpness_slider" style="margin-top:10px" class="col-xs-12 ui-slider ui-slider-horizontal ui-corner-all ui-widget ui-widget-content">-->
+                                      <!--<a class="ui-slider-handle ui-state-default ui-corner-all">-->
+                                      <!--</a>-->
+                                  <!--</span>-->
+                              <!--</td>-->
+                              <!--<td>-->
+                                  <!--<span>-->
+                                      <!--<input type="text" id="sharpness_value" style="width: 30px"/>-->
+                                  <!--</span>-->
+                              <!--</td>-->
+                          <!--</tr>-->
+
+                      </table>
                     </div><!-- /.col-lg-6 -->
                   </div>
                   <p></p>
 
               </div>
-            </div>
         </li>
         <li id="tab_con_2">
-            显示信息
-        </li>
-        <li id="tab_con_3">
-            图片抓取
+            <div class="panel panel-default">
+              <div class="panel-heading">抓取设置</div>
+                  <div class="panel-body">
+                      <div class="row">
+                           <div class="col-lg-8">
+                                <div class="input-group">
+                                  <span class="input-group-addon">
+                                    抓取间隔
+                                  </span>
+                                    <select class="combobox form-control" id="snapshot_interval">
+
+                                        <option value="24">24h</option>
+                                        <option value="12">12h</option>
+                                        <option value="6">6h</option>
+                                        <option value="3">3h</option>
+                                        <option value="1">1h</option>
+                                    </select>
+                                </div><!-- /input-group -->
+                              </div><!-- /.col-lg-6 -->
+                      </div>
+                      <!--<div class="row">-->
+                           <!--<div class="col-lg-8">-->
+                                <!--<div class="input-group">-->
+                                  <!--<span class="input-group-addon">-->
+                                    <!--存储周期-->
+                                  <!--</span>-->
+                                    <!--<select class="combobox form-control">-->
+                                        <!--<option value="1">1天</option>-->
+                                        <!--<option value="2">2天</option>-->
+                                        <!--<option value="7">1周</option>-->
+                                        <!--<option value="30">1月</option>-->
+                                        <!--<option value="180">6月</option>-->
+                                    <!--</select>-->
+                                <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
+                              <!--</div>&lt;!&ndash; /.col-lg-6 &ndash;&gt;-->
+                      <!--</div>                      <!--<div class="row">-->
+                           <!--<div class="col-lg-8">-->
+                                <!--<div class="input-group">-->
+                                  <!--<span class="input-group-addon">-->
+                                    <!--存储周期-->
+                                  <!--</span>-->
+                                    <!--<select class="combobox form-control">-->
+                                        <!--<option value="1">1天</option>-->
+                                        <!--<option value="2">2天</option>-->
+                                        <!--<option value="7">1周</option>-->
+                                        <!--<option value="30">1月</option>-->
+                                        <!--<option value="180">6月</option>-->
+                                    <!--</select>-->
+                                <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
+                              <!--</div>&lt;!&ndash; /.col-lg-6 &ndash;&gt;-->
+                      <!--</div>-->
+                  </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">历史数据清除</div>
+                <div class="panel-body">
+                    <input class="btn btn-primary col-lg-2" value="清除历史数据">
+                </div>
+            </div>
+
+
         </li>
 
+
     </ul>
+    <span>
+        <input class="btn btn-primary" role="button" value="保存" onclick="save_config()">
+        <p style="display:none" id="is_success">
+            保存成功
+        </p>
+    </span>
 </div>

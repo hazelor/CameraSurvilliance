@@ -74,3 +74,9 @@ a:hover {
     font-weight:bold;
     overflow:hidden;
 }
+
+.main_footer{
+    position:relative;
+    padding: 30px 0 0;
+}
+

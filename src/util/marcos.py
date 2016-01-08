@@ -12,7 +12,7 @@ THUMBNAIL_DIR = "static/img/thumbnail"
 
 CAPTURED_DIR = "static/img/captured"
 
-
+DEV_CONF_PATH = "conf/dev.conf"
 
 #about db
 DB_USER = 'guoxiao'
@@ -33,5 +33,18 @@ RES_FAIL = 1
 PAGE_NUMBER = 16
 #about motion
 
+CTRL_URL = r'http://localhost:%(ctrl_port)s/0/config/'
+MOTION_RESTART_URL = r'http://localhost:%(ctrl_port)s/0/action/restart'
+
 MOTION_CTRL_PORT = 8080
 MOTION_VIDEO_PORT = 8081
+
+
+WIDTH_CONF = 'width'
+HEIGHT_CONF = 'height'
+ROTATE_CONF = 'rotate'
+SNAPSHORT_INTERVAL_CONF = 'snapshot_interval'
+BRIGHTNESS_CONF = 'brightness'
+CONTRAST_CONF = 'contrast'
+SATURATION_CONF = 'saturation'
+HUE_CONF = 'hue'

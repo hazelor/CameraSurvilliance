@@ -24,6 +24,7 @@ def create_app():
         'template_path':'template',
         'xsrf_cookies':False,
         'debug': options.debug,
+        'ui_modules':routes.modules
     }
     return tornado.web.Application(routes.handlers, **settings)
 

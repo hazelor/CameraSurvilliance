@@ -15,3 +15,11 @@ def get_ip_address(ifname):
         0x8915,  # SIOCGIFADDR
         struct.pack('256s', ifname[:15])
     )[20:24])
+
+def disk_stat():
+    hd={}
+    disk = os.statvfs("/")
+    hd['available'] = disk.f_bsize * disk.f_bavail
+    hd['capacity'] = disk.f_bsize * disk.f_blocks
+    hd['used'] = disk.f_bsize * disk.f_bfree
+    return hd
