@@ -117,7 +117,7 @@
                           <span class="input-group-addon">
                             重启设备
                           </span>
-                          <input type="text" id="reset_btn" class="form-control btn btn-primary" role="button" value="重启">
+                          <input type="text" id="reboot_btn" class="form-control btn btn-primary" role="button" value="重启" onclick="device_reboot()">
                         </div><!-- /input-group -->
                       </div><!-- /.col-lg-6 -->
                   </div><!-- /.row -->
@@ -126,5 +126,10 @@
             </div>
         </li>
     </ul>
-    <input class="btn btn-primary" id="save_config_btn" role="button" value="保存">
+    <span>
+        <input class="btn btn-primary" id="save_config_btn" role="button" value="保存" onclick="save_basic_config()">
+        <p style="display:none" id="is_success">
+            保存成功
+        </p>
+    </span>
 </div>

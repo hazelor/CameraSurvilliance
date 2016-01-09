@@ -13,7 +13,9 @@ handlers = [
     #about setting page
     (r"/setting",SettingHandler),
     (r"/setting/(\w+)",SettingHandler),
-    # (r"/save_config", SaveConfigHandler),
+    (r"/download", DownloadHandler),
+    (r"/reboot", RebootHandler),
+    # (r"/setting/clear", ClearHandler)
 ]
 
 modules = {'monitor':setting_monitorModule}

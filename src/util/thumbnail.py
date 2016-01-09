@@ -29,6 +29,8 @@ def make_thumbnail(image_filepath):
     thumbnail = region.resize((THUMBNAIL_SIZE, THUMBNAIL_SIZE), Image.ANTIALIAS)
     thumbnail_filename = filename.split('.')[0]+'_tb.jpg'
     thumbnail_filepath = os.path.join(getPWDDir(),THUMBNAIL_DIR)
+    if not os.path.isdir(thumbnail_filepath):
+        os.makedirs(thumbnail_filepath)
     thumbnail_filepath = os.path.join(thumbnail_filepath,thumbnail_filename)
     thumbnail.save(thumbnail_filepath, quality = 100)
     # mysql operation

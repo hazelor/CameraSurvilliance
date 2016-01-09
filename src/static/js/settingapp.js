@@ -52,7 +52,7 @@ $(function(){
     //$("#sharpness_value").val($("#sharpness_slider").slider("value"));
 });
 
-function save_config(){
+function save_monitor_config(){
     if($('#tab_con_1').attr('class') == 'active'){
         //alert('tab_con_1')
         $.ajax({
@@ -105,5 +105,34 @@ function save_config(){
         //alert('tab_con_2')
     }
 
+}
+
+function save_basic_config(){
+
+}
+
+function clear_data(){
+    $.ajax({
+        url:'clear',
+        type:'get',
+        dateType:'text',
+        success:function(){
+            alert('数据清除成功!')
+        },
+        error:function(){
+            alert('数据清除失败!')
+        }
+    })
+}
+
+function device_reboot(){
+    $.ajax({
+        url:'reboot',
+        type:'get',
+        dateType:'text',
+        error:function(){
+            alert('重启失败')
+        },
+    })
 }
 

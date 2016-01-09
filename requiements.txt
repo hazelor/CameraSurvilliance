@@ -1,0 +1,2 @@
+修改motion.pid的保存目录
+/etc/motion/motion.conf权限

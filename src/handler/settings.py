@@ -5,6 +5,8 @@ import tornado
 from tornado.options import options
 from base import baseHandler
 from util.motion import *
+from util.commons import *
+# import shutil
 
 class SettingHandler(baseHandler):
     def get(self,input = 'basic'):
@@ -20,7 +22,8 @@ class SettingHandler(baseHandler):
             return self.render_monitor()
         if sub_page_name == 'save_config':
             return self.save_config()
-
+        if sub_page_name == 'clear':
+            return self.clear_data()
         return self.send_error(404)
 
     def post(self):
@@ -68,6 +71,22 @@ class SettingHandler(baseHandler):
         motion_restart()
         return self.write(is_success)
 
+    def clear_data(self):
+        clear_data()
+
+
+class RebootHandler(baseHandler):
+    def get(self):
+        print 'device reboot'
+        # device_reboot()
+
+
+# class ClearHandler(baseHandler):
+#     def get(self):
+#         clear_data()
+#         return
+
+
 
 class setting_monitorModule(tornado.web.UIModule):
     def render(self):
@@ -83,7 +102,7 @@ class setting_monitorModule(tornado.web.UIModule):
         config_dict['saturation'] = ''
         config_dict['snapshot_interval'] = ''
         get_motion_conf_value(config_dict)
-        print config_dict['snapshot_interval']
+        # print config_dict['snapshot_interval']
         return self.render_string("setting_monitor.js",width=config_dict['width'], height=config_dict['height'], framerate=config_dict['framerate'],
                                   rotate=config_dict['rotate'], brightness=config_dict['brightness'], contrast=config_dict['contrast'],
                                   saturation=config_dict['saturation'], snapshot_interval=str(int(config_dict['snapshot_interval'])/60/60))

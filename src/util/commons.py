@@ -4,6 +4,9 @@ import os
 import socket
 import fcntl
 import struct
+import shutil
+from dbtool import db_truncate
+from marcos import *
 
 def getPWDDir():
     return os.getcwd()
@@ -23,3 +26,16 @@ def disk_stat():
     hd['capacity'] = disk.f_bsize * disk.f_blocks
     hd['used'] = disk.f_bsize * disk.f_bfree
     return hd
+
+def clear_data():
+    pwd = getPWDDir()
+    captured_dir = os.path.join(pwd, CAPTURED_DIR)
+    thunmbnail_dir = os.path.join(pwd, THUMBNAIL_DIR)
+    download_dir = os.path.join(pwd, DOWNLOAD_DIR)
+    if os.path.isdir(download_dir):
+        shutil.rmtree(download_dir)
+    if os.path.isdir(thunmbnail_dir):
+        shutil.rmtree(thunmbnail_dir)
+    if os.path.isdir(captured_dir):
+        shutil.rmtree(captured_dir)
+    db_truncate()

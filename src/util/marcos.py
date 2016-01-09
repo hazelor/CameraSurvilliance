@@ -14,6 +14,8 @@ CAPTURED_DIR = "static/img/captured"
 
 DEV_CONF_PATH = "conf/dev.conf"
 
+DOWNLOAD_DIR = "static/download"
+
 #about db
 DB_USER = 'guoxiao'
 
@@ -35,9 +37,11 @@ PAGE_NUMBER = 16
 
 CTRL_URL = r'http://localhost:%(ctrl_port)s/0/config/'
 MOTION_RESTART_URL = r'http://localhost:%(ctrl_port)s/0/action/restart'
+MOTION_QUIT_URL = R'http://localhost:%(ctrl_port)s/0/action/quit'
 
 MOTION_CTRL_PORT = 8080
 MOTION_VIDEO_PORT = 8081
+MOTION_START_COMMAND = 'motion'
 
 
 WIDTH_CONF = 'width'

@@ -6,6 +6,7 @@ __author__ = 'guoxiao'
 import urllib2
 import re
 from marcos import *
+import subprocess
 
 def set_snapshot_interval(interval):
     url = "http://127.0.0.1:8080/0/config/set?snapshot_interval=" + interval
@@ -80,7 +81,23 @@ def set_motion_conf_value(**kw):
     # flag = re.search(r'Done',res).group()
     return str(RES_SUCESS)
 
+def motion_start():
+    # subprocess.Popen('sudo -s', shell=True, stdout=subprocess.PIPE)
+    # subprocess.Popen(SUDO_PASSWORD, shell=True, stdout=subprocess.PIPE)
+    subprocess.Popen(MOTION_START_COMMAND, shell=True, stdout=subprocess.PIPE)
+
+
+
+def motion_stop():
+    motion_quit_url = MOTION_QUIT_URL %{'ctrl_port':MOTION_CTRL_PORT}
+    req = urllib2.Request(motion_quit_url)
+    urllib2.urlopen(req)
+
+
 def motion_restart():
     motion_restart_url = MOTION_RESTART_URL %{'ctrl_port':MOTION_CTRL_PORT}
     req = urllib2.Request(motion_restart_url)
     urllib2.urlopen(req)
+
+def device_reboot():
+    subprocess.Popen('sudo reboot', shell=True, stdout=subprocess.PIPE)

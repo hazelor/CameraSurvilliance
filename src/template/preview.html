@@ -26,7 +26,10 @@
  <div class="clearfix"></div>
 <div class="row">
     <div class=" left pagination">
-         <input class="btn btn-primary" style="max-width: 150px; margin-right: 10px" value="数据下载">
+        <a download='' href='' onclick="javascrit:if(download_image()==false){return false;}" id="download_link">
+        <!--<a onclick="javascrit:if(download_image()==false){return false;}" id="download_link">-->
+            <input class="btn btn-primary" style="max-width: 150px; margin-right: 10px" value="数据下载">
+        </a>
         {{start_num}} to {{end_num}} of {{ total_num }}
 
     </div>

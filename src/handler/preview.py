@@ -3,10 +3,16 @@ __author__ = 'guoxiao'
 
 import tornado,tornado.web
 import re
+import os
 from tornado.options import options
 from util import dbtool
 from util.marcos import *
+from util.motion import *
+from util.commons import *
 from base import baseHandler
+from util import zip_tool
+import time
+# import subprocess
 
 class PreviewHandler(baseHandler):
     def get(self):
@@ -54,6 +60,25 @@ class PreviewHandler(baseHandler):
                            start_page_num = start_page_num,
                            end_page_num = end_page_num,
                            allitems = allitems)
+
+class DownloadHandler(baseHandler):
+    def get(self):
+        #  stop motion service
+        motion_stop()
+        time.sleep(2)
+        # zip  operation
+        folder_name = os.path.join(getPWDDir(),CAPTURED_DIR)
+        # print folder_name
+        zip_file_name = dbtool.create_nowTime_strip()+'.zip'
+        zip_dir = os.path.join(getPWDDir(),DOWNLOAD_DIR, zip_file_name)
+        # print zip_dir
+        zip_tool.zip_images(folder_name, zip_dir)
+        # start motion service
+        motion_start()
+        # self.write('test.rar')
+        self.write(zip_file_name)
+
+
 
 
 class thumbnailModule(tornado.web.UIModule):
