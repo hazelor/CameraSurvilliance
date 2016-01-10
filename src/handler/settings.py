@@ -94,8 +94,7 @@ class SettingHandler(baseHandler):
 
 class RebootHandler(baseHandler):
     def get(self):
-        print 'device reboot'
-        # device_reboot()
+        device_reboot()
 
 
 # class ClearHandler(baseHandler):
@@ -112,6 +111,25 @@ class SaveBasicConfigHandler(baseHandler):
             set_basic_conf_value(config_dict)
         return
 
+class DeviceTimeHandler(baseHandler):
+    @tornado.web.asynchronous
+    def get(self):
+        device_time =  time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
+        self.write(device_time)
+        self.finish()
+        # self.get_data(callback=self.on_finish)
+    # def get_data(self, callback):
+    #     if self.request.connection.stream.closed():
+    #         return
+    #     device_time =  time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
+    #     callback(device_time)
+    # def on_finish(self, data):
+
+
+class TimeSynchronizeHandler(baseHandler):
+    def get(self):
+        time = self.get_argument('time')
+        set_device_time(time)
 
 
 

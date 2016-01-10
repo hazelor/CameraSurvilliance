@@ -16,7 +16,9 @@ handlers = [
     (r"/download", DownloadHandler),
     (r"/reboot", RebootHandler),
     # (r"/setting/clear", ClearHandler)
-    (r"/save_basic_config", SaveBasicConfigHandler)
+    (r"/save_basic_config", SaveBasicConfigHandler),
+    (r"/device_time", DeviceTimeHandler),
+    (r"/time_synchronize", TimeSynchronizeHandler),
 ]
 
 modules = {'monitor':setting_monitorModule,

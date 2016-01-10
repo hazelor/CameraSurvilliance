@@ -1,3 +1,23 @@
+$(document).ready(function(){
+    setTimeout(request_device_time, 1000)
+    function request_device_time(){
+        $.ajax({
+            url:'/device_time',
+            type:'get',
+            dataTyoe:'text',
+            success:function(data, status){
+                document.getElementById('device_time').value = data
+                setTimeout(request_device_time, 1000)
+            },
+            error:function(){
+                setTimeout(request_device_time, 1000)
+            }
+        })
+    }
+})
+
+
+
 
 var is_deleting = false;
 
@@ -17,7 +37,8 @@ function switchTab(index, issavebtnshow) {
     $("ul#tab_con").find('li').each(function () {
         $(this).removeClass('active');
     })
-    $("li#tab_con_"+index).addClass('active');
+    $("li#monitor_tab_con_"+index).addClass('active');
+    $("li#basic_tab_con_"+index).addClass('active');
 
     if(issavebtnshow == 0)
     {
@@ -59,10 +80,74 @@ $(function(){
     //});
     //
     //$("#sharpness_value").val($("#sharpness_slider").slider("value"));
+
+    $('#is_synchronize').change(function(){
+        //alert("change!")
+        if(this.checked==true){
+            document.getElementById('time2set').value = curent_time()
+            //var clock = curent_time()
+            $.ajax({
+                url:'time_synchronize',
+                type:'get',
+                dateType:'text',
+                data:{
+                    'time':curent_time(),
+                },
+                success:function(){
+                    document.getElementById('is_success').innerHTML='同步成功'
+                    document.getElementById('is_success').style.display='inline'
+                },
+                error:function(){
+                    document.getElementById('is_success').innerHTML='同步失败'
+                    document.getElementById('is_success').style.display='inline'
+                }
+            })
+            //alert(clock)
+        }
+    })
 });
 
+
+function curent_time()
+    {
+        var now = new Date();
+
+        var year = now.getFullYear();       //年
+        var month = now.getMonth() + 1;     //月
+        var day = now.getDate();            //日
+
+        var hh = now.getHours();            //时
+        var mm = now.getMinutes();          //分
+        var ss = now.getSeconds()           //秒
+
+        var clock = year + "-";
+
+        if(month < 10)
+            clock += "0";
+
+        clock += month + "-";
+
+        if(day < 10)
+            clock += "0";
+
+        clock += day + " ";
+
+        if(hh < 10)
+            clock += "0";
+
+        clock += hh + ":";
+        if (mm < 10)
+            clock += '0';
+        clock += mm+':';
+        if(ss<10)
+            clock += '0'
+        clock +=ss
+        return(clock);
+    }
+
+
 function save_monitor_config(){
-    if($('#tab_con_1').attr('class') == 'active'){
+    if($('#monitor_tab_con_1').attr('class') == 'active'){
         //alert('tab_con_1')
         $.ajax({
             url:'save_monitor_config',
@@ -112,7 +197,7 @@ function save_monitor_config(){
 }
 
 function save_basic_config(){
-    if($('#tab_con_1').attr('class') == 'active'){
+    if($('#basic_tab_con_1').attr('class') == 'active'){
         $.ajax({
             url:'save_basic_config',
             type:'get',
@@ -133,6 +218,29 @@ function save_basic_config(){
         })
     }
     else{
+        if(!(document.getElementById('time2set').value == '')){
+            //alert(document.getElementById('time2set').value)
+            $.ajax({
+                url:'time_synchronize',
+                type:'get',
+                dateType:'text',
+                data:{
+                    'time':document.getElementById('time2set').value+':00',
+                },
+                success:function(){
+                    document.getElementById('is_success').innerHTML='同步成功'
+                    document.getElementById('is_success').style.display='inline'
+                },
+                error:function(){
+                    document.getElementById('is_success').innerHTML='同步失败'
+                    document.getElementById('is_success').style.display='inline'
+                }
+            })
+        }
+        //else{
+        //    alert('blank')
+        //}
+        //alert()
         //$.ajax({
         //    url:'save_basic_config',
         //    type:'get',

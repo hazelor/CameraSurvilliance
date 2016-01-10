@@ -81,3 +81,8 @@ def write_conf(conf_dir, kw):
     # channel_number = config.get('conf', 'channel_number')
     config.write(fp)
     fp.close()
+
+def set_device_time(time_str):
+    command = "sudo date -s "+"\""+time_str+"\""
+    print command
+    # os.system(command)

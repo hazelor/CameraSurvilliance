@@ -100,4 +100,5 @@ def motion_restart():
     urllib2.urlopen(req)
 
 def device_reboot():
-    subprocess.Popen('sudo reboot', shell=True, stdout=subprocess.PIPE)
+    print 'device reboot'
+    # subprocess.Popen('sudo reboot', shell=True, stdout=subprocess.PIPE)
