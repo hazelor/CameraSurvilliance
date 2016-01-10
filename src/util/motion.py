@@ -43,7 +43,7 @@ def get_motion_conf_value(kw):
         kw[k] = res
     return
 
-def set_motion_conf_value(**kw):
+def set_motion_conf_value(kw):
     set_ctrl_url = CTRL_URL %{'ctrl_port':MOTION_CTRL_PORT}
     # set_ctrl_url = CTRL_URL %MOTION_CTRL_PORT
     # set_str = str()
@@ -60,7 +60,7 @@ def set_motion_conf_value(**kw):
         if flag == 'done':
             pass
         else:
-            print 'here' + k
+            # print 'here' + k
             return str(RES_FAIL)
     set_ctrl_url += "writeyes"
     # print set_ctrl_url
@@ -71,7 +71,7 @@ def set_motion_conf_value(**kw):
     if flag == 'done':
         pass
     else:
-        print 'here write'
+        # print 'here write'
         return str(RES_FAIL)
         # print  tmp_set_ctrl_url
     # set_ctrl_url += "set?%s"%(set_str)

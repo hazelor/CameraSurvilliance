@@ -1,4 +1,13 @@
 
+var is_deleting = false;
+
+function alert_if_deleting(){
+    if(is_deleting)
+    return '历史数据清除中,您确定要离开当前页面?'
+}
+
+window.onbeforeunload = alert_if_deleting;
+
 function switchTab(index, issavebtnshow) {
     $("ul#nav").find('li').each(function () {
         $(this).removeClass('active');
@@ -56,70 +65,109 @@ function save_monitor_config(){
     if($('#tab_con_1').attr('class') == 'active'){
         //alert('tab_con_1')
         $.ajax({
-        url:'save_config',
-        type:'get',
-        dateType:'text',
-        data:{
-            'type':'video',
-            'resolution':document.getElementById('resolution').value,
-            'framerate':document.getElementById('framerate').value,
-            'rotate':document.getElementById('rotate').value,
-            'brightness':document.getElementById('bright_value').value,
-            'contrast':document.getElementById('contrast_value').value,
-            'saturation':document.getElementById('saturation_value').value,
-        },
-        success:function(data, status){
-          if(data == "0"){
-              document.getElementById('is_success').style.display='inline'
-          }
+            url:'save_monitor_config',
+            type:'get',
+            dateType:'text',
+            data:{
+                'type':'video',
+                'resolution':document.getElementById('resolution').value,
+                'framerate':document.getElementById('framerate').value,
+                'rotate':document.getElementById('rotate').value,
+                'brightness':document.getElementById('bright_value').value,
+                'contrast':document.getElementById('contrast_value').value,
+                'saturation':document.getElementById('saturation_value').value,
+            },
+            success:function(){
+                document.getElementById('is_success').innerHTML='保存成功'
+                document.getElementById('is_success').style.display='inline'
 
-          else{
-              document.getElementById('is_success').style.display='inline'
-              document.getElementById('is_success').innerHTML='保存失败'
-          }
-
-        },
-    })
+            },
+            error:function(){
+                document.getElementById('is_success').innerHTML='保存失败'
+                document.getElementById('is_success').style.display='inline'
+            },
+        })
     }
     else{
         $.ajax({
-        url:'save_config',
-        type:'get',
-        dateType:'text',
-        data:{
-            'type':'image',
-            'snapshot_interval':document.getElementById('snapshot_interval').value,
-        },
-        success:function(data, status){
-          if(data == "0"){
-              document.getElementById('is_success').style.display='inline'
-          }
+            url:'save_monitor_config',
+            type:'get',
+            dateType:'text',
+            data:{
+                'type':'image',
+                'snapshot_interval':document.getElementById('snapshot_interval').value,
+            },
+            success:function(){
+                document.getElementById('is_success').innerHTML='保存成功'
+                document.getElementById('is_success').style.display='inline'
 
-          else{
-              document.getElementById('is_success').style.display='inline'
-              document.getElementById('is_success').innerHTML='保存失败'
-          }
-
-        }
-    })
-        //alert('tab_con_2')
+            },
+            error:function(){
+                document.getElementById('is_success').innerHTML='保存失败'
+                document.getElementById('is_success').style.display='inline'
+            },
+        })
     }
 
 }
 
 function save_basic_config(){
-
+    if($('#tab_con_1').attr('class') == 'active'){
+        $.ajax({
+            url:'save_basic_config',
+            type:'get',
+            dateType:'text',
+            data:{
+                'type':'device_info',
+                'device_name':document.getElementById('device_name').value,
+                'device_id':document.getElementById('device_id').value,
+            },
+            success:function(){
+                document.getElementById('is_success').innerHTML='保存成功'
+                document.getElementById('is_success').style.display='inline'
+            },
+            error:function(){
+                document.getElementById('is_success').innerHTML='保存失败'
+                document.getElementById('is_success').style.display='inline'
+            }
+        })
+    }
+    else{
+        //$.ajax({
+        //    url:'save_basic_config',
+        //    type:'get',
+        //    dateType:'text',
+        //    data:{
+        //        'type':'image',
+        //        'snapshot_interval':document.getElementById('snapshot_interval').value,
+        //    },
+        //    success:function(data, status){
+        //      if(data == "0"){
+        //          document.getElementById('is_success').style.display='inline'
+        //      }
+        //
+        //      else{
+        //          document.getElementById('is_success').style.display='inline'
+        //          document.getElementById('is_success').innerHTML='保存失败'
+        //      }
+        //
+        //    }
+        //})
+    }
 }
 
 function clear_data(){
+    is_deleting = true
     $.ajax({
         url:'clear',
         type:'get',
         dateType:'text',
         success:function(){
+            is_deleting = false
             alert('数据清除成功!')
         },
         error:function(){
+            is_deleting = false
             alert('数据清除失败!')
         }
     })

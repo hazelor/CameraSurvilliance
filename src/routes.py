@@ -16,6 +16,8 @@ handlers = [
     (r"/download", DownloadHandler),
     (r"/reboot", RebootHandler),
     # (r"/setting/clear", ClearHandler)
+    (r"/save_basic_config", SaveBasicConfigHandler)
 ]
 
-modules = {'monitor':setting_monitorModule}
+modules = {'monitor':setting_monitorModule,
+           'basic':setting_basicModule,}
