@@ -6,11 +6,17 @@
 {%block title%}图像预览{%end%}
 
 {%block layout_preview%}
+<div>
     <div class="LayBg"></div>
     <div class="LayBox">
         <div class="LayImg"></div>
         <img class="Close" src={{static_url("img/popup/close.png")}} width="27" height="27"/>
     </div>
+</div>
+<div>
+    <div class="LoadingBg"></div>
+    <div class="Loading_message"></div>
+    <div class="LoadingImg"></div>
 </div>
 {%end%}
 

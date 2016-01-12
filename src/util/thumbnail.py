@@ -34,7 +34,7 @@ def make_thumbnail(image_filepath):
     thumbnail_filepath = os.path.join(thumbnail_filepath,thumbnail_filename)
     thumbnail.save(thumbnail_filepath, quality = 100)
     # mysql operation
-    add_caputuredimg(filename,thumbnail_filename)
+    add_caputuredimg(filename,thumbnail_filename, width, height)
 
 
 if __name__ == '__main__':

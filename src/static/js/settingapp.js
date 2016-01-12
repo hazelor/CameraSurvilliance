@@ -14,16 +14,46 @@ $(document).ready(function(){
             }
         })
     }
+    var opts = {
+      lines: 12,            // The number of lines to draw
+      length: 7,            // The length of each line
+      width: 5,             // The line thickness
+      radius: 10,           // The radius of the inner circle
+      scale: 1.0,           // Scales overall size of the spinner
+      corners: 1,           // Roundness (0..1)
+      color: '#000',        // #rgb or #rrggbb
+      opacity: 1/4,         // Opacity of the lines
+      rotate: 0,            // Rotation offset
+      direction: 1,         // 1: clockwise, -1: counterclockwise
+      speed: 1,             // Rounds per second
+      trail: 100,           // Afterglow percentage
+      fps: 20,              // Frames per second when using setTimeout()
+      zIndex: 2e9,          // Use a high z-index by default
+      className: 'spinner', // CSS class to assign to the element
+      top: '100px',           // center vertically
+      left: '50%',          // center horizontally
+      shadow: false,        // Whether to render a shadow
+      hwaccel: false,       // Whether to use hardware acceleration (might be buggy)
+      position: 'absolute'  // Element positioning
+    };
+    var target = document.getElementsByClassName('LoadingImg');
+    //alert(target)
+    //var spinner = new Spinner(opts).spin(target);
+    var spinner = new Spinner().spin(target[0]);
 })
 
 
 
 
 var is_deleting = false;
+var is_setting = false;
 
 function alert_if_deleting(){
     if(is_deleting)
-    return '历史数据清除中,您确定要离开当前页面?'
+        return '历史数据清除中,您确定要离开当前页面?';
+    if(is_setting)
+        return '监控设置生效中,您确定要离开当前页面?'
+
 }
 
 window.onbeforeunload = alert_if_deleting;
@@ -105,7 +135,35 @@ $(function(){
             //alert(clock)
         }
     })
+
+    //$(".Close").click(function(){
+    //
+    //    $(".LayBg,.LayBox").hide();
+    //});
+    //$(".thumbnail").click(function(){
+    //    $(".LayBg").height(document.body.clientWidth);
+    //    $(".LayImg").html($(this).find(".hidden").html());
+    //    $(".LayBg").show();
+    //    $(".LayBox").fadeIn(300);
+    //    var width = $(".LayImg").find('img').attr('image_width')
+    //    alert(width)
+    //});
 });
+
+
+function loading_begin(loading_message){
+    $(".LoadingBg").height(document.body.clientWidth);
+    $(".LoadingBg").show();
+    $(".LoadingImg").fadeIn(300);
+    $(".Loading_message").html("<p>"+loading_message+"</p>")
+    //$(".Loading_message").fadeIn(300);
+
+}
+
+function loading_end(){
+    $('.LoadingBg, .LoadingImg, .Loading_message').hide();
+}
+
 
 
 function curent_time()
@@ -147,6 +205,8 @@ function curent_time()
 
 
 function save_monitor_config(){
+    is_setting = true;
+    loading_begin("设置生效中...");
     if($('#monitor_tab_con_1').attr('class') == 'active'){
         //alert('tab_con_1')
         $.ajax({
@@ -165,11 +225,15 @@ function save_monitor_config(){
             success:function(){
                 document.getElementById('is_success').innerHTML='保存成功'
                 document.getElementById('is_success').style.display='inline'
+                loading_end();
+                is_setting = false;
 
             },
             error:function(){
                 document.getElementById('is_success').innerHTML='保存失败'
                 document.getElementById('is_success').style.display='inline'
+                loading_end();
+                is_setting = false;
             },
         })
     }
@@ -185,11 +249,15 @@ function save_monitor_config(){
             success:function(){
                 document.getElementById('is_success').innerHTML='保存成功'
                 document.getElementById('is_success').style.display='inline'
+                loading_end();
+                is_setting = false;
 
             },
             error:function(){
                 document.getElementById('is_success').innerHTML='保存失败'
                 document.getElementById('is_success').style.display='inline'
+                loading_end();
+                is_setting = false;
             },
         })
     }
@@ -266,15 +334,18 @@ function save_basic_config(){
 
 function clear_data(){
     is_deleting = true
+    loading_begin("数据删除中...")
     $.ajax({
         url:'clear',
         type:'get',
         dateType:'text',
         success:function(){
+            loading_end()
             is_deleting = false
             alert('数据清除成功!')
         },
         error:function(){
+            loading_end()
             is_deleting = false
             alert('数据清除失败!')
         }

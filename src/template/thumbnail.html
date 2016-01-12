@@ -2,10 +2,12 @@
     <a href="#" class="thumbnail">
         <img src="/static/img/thumbnail/{{tb['thumbnail_path']}}"/>
         <span class="hidden">
-            <img src="/static/img/captured/{{tb['image_path']}}"  class="originImg"/>
+            <img src="/static/img/captured/{{tb['image_path']}}"  class="originImg" image_width="{{tb['width']}}" image_height="{{tb['height']}}"/>
         </span>
     </a>
     <div class="caption">
         <p>{{ tb['date'] }}</p>
+        <!--<p style="display: none" id={{tb['thumbnail_path']}}_width>{{tb['width']}}</p>-->
+        <!--<p style="display: none" id={{tb['thumbnail_path']}}_height>{{tb['height']}}</p>-->
     </div>
 </div>

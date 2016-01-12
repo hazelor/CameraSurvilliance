@@ -37,13 +37,13 @@ class database_resource:
         self.conn.close()
 
 
-def add_caputuredimg(filename,thumbnail_filename):
+def add_caputuredimg(filename,thumbnail_filename, width, height):
     with database_resource() as cursor:
     # conn = create_engine(DB_USER, DB_USER_PASSWORD, DB_NAME, is_auto_commit=True)
     # cursor = conn.cursor()
-        sqlstr = 'insert into %s (image_path, thumbnail_path, date)'%(DB_IAMGE_TABLE_NAME)
-        sqlstr = sqlstr+'values (%s, %s, %s)'
-        cursor.execute(sqlstr,[filename, thumbnail_filename, create_nowTime()])
+        sqlstr = 'insert into %s (image_path, thumbnail_path, date, width, height)'%(DB_IAMGE_TABLE_NAME)
+        sqlstr = sqlstr+'values (%s, %s, %s, %s, %s)'
+        cursor.execute(sqlstr,[filename, thumbnail_filename, create_nowTime(), width, height])
     # cursor.close()
     # conn.close()
 

@@ -6,6 +6,7 @@ from tornado.options import options
 from base import baseHandler
 from util.motion import *
 from util.commons import *
+import time
 # from util.conf import *
 # import shutil
 import time
@@ -22,8 +23,13 @@ class SettingHandler(baseHandler):
             return self.render_basic()
         if sub_page_name == 'monitor':
             return self.render_monitor()
-
-
+        if sub_page_name == 'reboot':
+            device_reboot()
+            return
+        if sub_page_name == 'time_synchronize':
+            time = self.get_argument('time')
+            set_device_time(time)
+            return
         if sub_page_name == 'save_basic_config':
             # print 'here'
             return self.save_basic_config()
@@ -85,6 +91,7 @@ class SettingHandler(baseHandler):
         # is_success = set_motion_conf_value(config_dict)
         set_motion_conf_value(config_dict)
         motion_restart()
+        time.sleep(8)
         # return self.write(is_success)
 
     def clear_data(self):

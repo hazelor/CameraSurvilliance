@@ -30,7 +30,9 @@ CREATE TABLE IF NOT EXISTS `image_thumbNail` (
   `id` int(11) NOT NULL,
   `image_path` varchar(100) NOT NULL,
   `thumbnail_path` varchar(100) NOT NULL,
-  `date` datetime NOT NULL
+  `date` datetime NOT NULL,
+  `width` VARCHAR(10) NOT NULL,
+  `height` VARCHAR(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

@@ -22,9 +22,46 @@ jQuery(function(){
         $(".LayImg").html($(this).find(".hidden").html());
         $(".LayBg").show();
         $(".LayBox").fadeIn(300);
+        var width = $(".LayImg").find('img').attr('image_width');
+        var height = $(".LayImg").find('img').attr('image_height');
+        if (height>480)
+        {
+            $(".LayBox").width(640);
+            $(".LayBox").height(480);
+            $(".LayImg img").width(640);
+            $(".LayImg img").height(480);
+        }
+        else
+        {
+            $(".LayBox").width(width);
+            $(".LayBox").height(height);
+            $(".LayImg img").width(width);
+            $(".LayImg img").height(height);
+        }
+
+
+        //alert(width)
     });
+    var target = document.getElementsByClassName('LoadingImg');
+    var spinner = new Spinner().spin(target[0]);
+
 
 })
+
+
+function loading_begin(loading_message){
+    $(".LoadingBg").height(document.body.clientWidth);
+    $(".LoadingBg").show();
+    $(".LoadingImg").fadeIn(300);
+    $(".Loading_message").html("<p>"+loading_message+"</p>")
+    //$(".Loading_message").fadeIn(300);
+
+}
+
+function loading_end(){
+    $('.LoadingBg, .LoadingImg, .Loading_message').hide();
+}
+
 
 
 function page_jump(){
@@ -35,6 +72,7 @@ function page_jump(){
 function download_image(){
     if(confirm('是否下载?')){
         is_downloading = true
+        loading_begin("下载准备中...")
         $.ajax({
             url:'download',
             async:false,
@@ -47,6 +85,7 @@ function download_image(){
                     //can_download = true
                     document.getElementById('download_link').href = href
                     document.getElementById('download_link').download = file_name
+                    loading_end()
                     is_downloading = false
                     return true
                 }
@@ -54,6 +93,7 @@ function download_image(){
                     alert('获取数据失败!')
                     document.getElementById('download_link').href = ''
                     document.getElementById('download_link').download = ''
+                    loading_end()
                     is_downloading = false
                     return false
                 }
@@ -62,6 +102,7 @@ function download_image(){
                     alert('获取数据失败!')
                     document.getElementById('download_link').href = ''
                     document.getElementById('download_link').download = ''
+                    loading_end()
                     is_downloading = false
                     return false
             }
