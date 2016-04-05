@@ -9,6 +9,7 @@ from util.commons import *
 import time
 # from util.conf import *
 # import shutil
+from util.marcos import *
 import time
 
 class SettingHandler(baseHandler):
@@ -153,12 +154,16 @@ class setting_monitorModule(tornado.web.UIModule):
         monitor_config_dict['contrast'] = ''
         monitor_config_dict['saturation'] = ''
         monitor_config_dict['snapshot_interval'] = ''
-        get_motion_conf_value(monitor_config_dict)
-        # print config_dict['snapshot_interval']
-        return self.render_string("setting_monitor.js",width=monitor_config_dict['width'], height=monitor_config_dict['height'], framerate=monitor_config_dict['framerate'],
+        res = get_motion_conf_value(monitor_config_dict)
+        if res == RES_SUCESS:
+            # print config_dict['snapshot_interval']
+            return self.render_string("setting_monitor.js",width=monitor_config_dict['width'], height=monitor_config_dict['height'], framerate=monitor_config_dict['framerate'],
                                   rotate=monitor_config_dict['rotate'], brightness=monitor_config_dict['brightness'], contrast=monitor_config_dict['contrast'],
                                   saturation=monitor_config_dict['saturation'], snapshot_interval=str(int(monitor_config_dict['snapshot_interval'])/60/60))
-
+        else:
+            return self.render_string("setting_monitor.js",width="", height="", framerate="",
+                                  rotate="", brightness="", contrast="",
+                                  saturation="", snapshot_interval="")
 
 class setting_basicModule(tornado.web.UIModule):
     def render(self):
@@ -170,7 +175,9 @@ class setting_basicModule(tornado.web.UIModule):
         basic_config_dict['device_type'] = ''
         basic_config_dict['channel_number'] = ''
         basic_config_dict['storage'] = ''
+        basic_config_dict['used_storage'] = ''
         get_basic_conf_value(basic_config_dict)
+        basic_config_dict['storage'] =basic_config_dict['storage']+'GB'
         return self.render_string("setting_basic.js", device_name=basic_config_dict['device_name'],
                                   device_id=basic_config_dict['device_id'], device_type=basic_config_dict['device_type'],
                                   channel_number=basic_config_dict['channel_number'], storage=basic_config_dict['storage'], )
