@@ -1,9 +1,71 @@
 {%extends "base.html" %}
-
+{% block metadata%}
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/tbapp.css">
+<script src="/static/js/tbapp.js"></script>
+{%end%}
 {%block title%}主页{%end%}
 
 {%block content%}
-<span>主页</span>
+<div class="row">
+    <div class="col-sm-6 col-md-3 col-lg-6">
+        {%if newest_img != []%}
+        <a href="#" class="thumbnail">
+            <img src="/static/img/thumbnail/{{newest_img['thumbnail_path']}}"/>
 
+        </a>
+        <div class="caption">
+            <p>最新获取图像-{{ newest_img['date'] }}</p>
+
+        </div>
+        {% else %}
+        <div class="caption" style="margin-top: 100px">
+            <h3>欢迎使用-物候检测系统</h3>
+
+        </div>
+        {%end%}
+    </div>
+    <div class="panel panel-default col-sm-6 col-md-3  col-lg-6">
+        <div class="panel-heading">基本信息</div>
+        <div class="panel-body">
+            <table class="table table-bordered table-striped">
+                      <colgroup>
+                          <col class="col-xs-1">
+                          <col class="col-xs-3">
+                      </colgroup>
+                      <thead>
+                      <tr>
+                          <th>项目</th>
+                          <th>信息</th>
+                      </tr>
+                      </thead>
+                      <tr>
+                          <td class="active">设备名称</td>
+                          <td id="device_name">{{basic_config_dict['device_name']}}</td>
+                      </tr>
+                      <tr>
+                          <td class="active">设备ID</td>
+                          <td id="device_id">{{basic_config_dict['device_id']}}</td>
+                      </tr>
+                      <tr>
+                          <td class="active">设备型号</td>
+                          <td id="device_type">{{basic_config_dict['device_type']}}</td>
+                      </tr>
+                      <tr>
+                          <td class="active">通道个数</td>
+                          <td id="channel_number">{{basic_config_dict['channel_number']}}</td>
+                      </tr>
+                <tr>
+                    <td class="active">剩余存储</td>
+                    <td id="storage">{{basic_config_dict['storage']}}GB</td>
+                </tr>
+
+                <tr>
+                    <td class="active">图像数量</td>
+                    <td id="img_num">{{basic_config_dict['img_num']}}张</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
 
 {%end%}
