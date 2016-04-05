@@ -17,9 +17,9 @@ DEV_CONF_PATH = "conf/dev.conf"
 DOWNLOAD_DIR = "static/download"
 
 #about db
-DB_USER = 'guoxiao'
+DB_USER = 'root'
 
-DB_USER_PASSWORD = 'guoxiao'
+DB_USER_PASSWORD = ''
 
 DB_NAME = 'camera_image'
 

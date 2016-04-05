@@ -34,14 +34,17 @@ def get_motion_conf_value(kw):
         tmp_get_ctrl_url += "get?query=" + k
         # print  tmp_get_ctrl_url
         # get_ctrl_url = MOTION_CTRL_PORT +"get?query="+conf_item
-        req = urllib2.Request(tmp_get_ctrl_url)
-        res_data = urllib2.urlopen(req)
+        try:
+            req = urllib2.Request(tmp_get_ctrl_url)
+            res_data = urllib2.urlopen(req)
+        except:
+            return RES_FAIL
         res = res_data.read()
         res = re.search(r'(\d+)',res).group()
         # print type(res)
         # print res
         kw[k] = res
-    return
+    return RES_SUCESS
 
 def set_motion_conf_value(kw):
     set_ctrl_url = CTRL_URL %{'ctrl_port':MOTION_CTRL_PORT}
@@ -52,8 +55,12 @@ def set_motion_conf_value(kw):
         tmp_set_ctrl_url = set_ctrl_url
         tmp_set_ctrl_url += "set?%s=%s"%(k,v)
         # print tmp_set_ctrl_url
-        req = urllib2.Request(tmp_set_ctrl_url)
-        res_data = urllib2.urlopen(req)
+        try:
+            req = urllib2.Request(tmp_set_ctrl_url)
+            res_data = urllib2.urlopen(req)
+        except:
+            return str(RES_FAIL)
+
         res = res_data.read()
         flag = re.search(r'[Dd]one',res).group().lower()
 
@@ -64,8 +71,11 @@ def set_motion_conf_value(kw):
             return str(RES_FAIL)
     set_ctrl_url += "writeyes"
     # print set_ctrl_url
-    req = urllib2.Request(set_ctrl_url)
-    res_data = urllib2.urlopen(req)
+    try:
+        req = urllib2.Request(set_ctrl_url)
+        res_data = urllib2.urlopen(req)
+    except:
+        return str(RES_FAIL)
     res = res_data.read()
     flag = re.search(r'[Dd]one',res).group().lower()
     if flag == 'done':
@@ -100,5 +110,5 @@ def motion_restart():
     urllib2.urlopen(req)
 
 def device_reboot():
-    print 'device reboot'
-    # subprocess.Popen('sudo reboot', shell=True, stdout=subprocess.PIPE)
+    # print 'device reboot'
+    subprocess.Popen('sudo reboot', shell=True, stdout=subprocess.PIPE)

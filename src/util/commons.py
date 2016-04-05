@@ -52,6 +52,7 @@ def get_basic_conf_value(kw):
     # print conf_dir
     read_conf(conf_dir, kw)
     kw['storage'] = str(disk_stat()['available'])
+    kw['used_storage'] = str(disk_stat()['used'])
     # return
 
 def set_basic_conf_value(kw):
@@ -84,5 +85,5 @@ def write_conf(conf_dir, kw):
 
 def set_device_time(time_str):
     command = "sudo date -s "+"\""+time_str+"\""
-    print command
-    # os.system(command)
+    # print command
+    os.system(command)
